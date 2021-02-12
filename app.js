@@ -22,7 +22,9 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', () => {
-    res.send('How you doin!')
+    res.send({
+        msg: 'How you doin!'
+    })
 })
 
 const PORT = process.env.PORT || 5000;
