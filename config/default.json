@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://heth:heth@cluster0.cogym.mongodb.net/spit?retryWrites=true&w=majority",
+    "jwtSecret": "Hethgala"
+}
