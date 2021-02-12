@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', () => {
+app.get('/', (req, res) => {
     res.send({
         msg: 'How you doin!'
     })
