@@ -7,11 +7,22 @@ const AnalyticsSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: User
     },
-    analysisData: [{
-        brand: String,
-        number: String,
-        percentageShare: String
-    }],
+    mycompanyPercentage: {
+        type: String,
+        required: true
+    },
+    mycompanyCount: {
+        type: String,
+        required: true
+    },
+    othercompanyPercentage: {
+        type: String,
+        required: true
+    },
+    othercompanyCount: {
+        type: String,
+        required: true
+    },
     video: {
         type: String
     },
