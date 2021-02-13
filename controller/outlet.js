@@ -51,3 +51,11 @@ exports.getAllOutlets = async (req, res) => {
         res.status(500).send('Server Error')
     }
 }
+
+// exports.updateStock = async (req, res) => {
+//     try {
+
+//     } catch (error) {
+
+//     }
+// }

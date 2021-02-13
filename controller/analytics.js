@@ -10,10 +10,13 @@ const datamanipulation = async (response, brand, brandName, video) => {
     let mycompanyPercentage = 0;
     let mycompanyCount = 0;
     let othercompanyCount = 0;
+    let othercompanyPercentage = 0;
 
     for (var el in resp) {
         if (el === brand.name) {
             mycompanyPercentage = resp[el]
+        } else {
+            othercompanyPercentage = othercompanyPercentage + resp[el]
         }
     }
 
