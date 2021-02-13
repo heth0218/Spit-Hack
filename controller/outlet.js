@@ -2,7 +2,7 @@ const Outlet = require('../models/Outlet');
 
 exports.makeOutlet = async (req, res) => {
     try {
-        const { name } = req.body;
+        const { name, email, stock } = req.body;
 
         const createdBy = req.user._id
 
@@ -14,7 +14,7 @@ exports.makeOutlet = async (req, res) => {
             })
         }
 
-        newOutlet = new Outlet({ name, createdBy });
+        newOutlet = new Outlet({ name, createdBy, email, stock });
 
         await newOutlet.save();
 

@@ -6,6 +6,14 @@ const OutletSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    stock: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: User
