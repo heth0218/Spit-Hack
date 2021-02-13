@@ -1,6 +1,7 @@
 const Analytics = require('../models/Analytics')
 const pusher = require('../config/pusher');
 const User = require('../models/User');
+const Outlet = require('../models/Outlet')
 
 
 const datamanipulation = async (response, brand, brandName, video) => {
@@ -118,6 +119,32 @@ exports.getAnalytics = async (req, res) => {
         }
 
         res.status(200).send(analytics)
+
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send('Server Error')
+    }
+}
+
+exports.getLatestAnalytics = async (req, res) => {
+    try {
+        const { companyName, outlets } = req.body;
+
+        console.log(req.body)
+
+        const company = await User.findOne({ name: companyName });
+
+        const companyOutlet = await Outlet.findOne({ name: outlets })
+
+        const latestDetails = await Analytics.find({ brandName: company._id, outlet: companyOutlet._id });
+
+        if (latestDetails.length === 0) {
+            return res.status(404).send({
+                msg: "No data found"
+            })
+        }
+
+        res.status(200).send(latestDetails[latestDetails.length - 1])
 
     } catch (error) {
         console.log(error.message);
