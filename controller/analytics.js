@@ -1,4 +1,5 @@
 const Analytics = require('../models/Analytics')
+const pusher = require('../config/pusher');
 
 exports.createAnalytics = async (req, res) => {
     try {
@@ -9,6 +10,8 @@ exports.createAnalytics = async (req, res) => {
         const newAnalysis = new Analytics({ analysisData, brandName, outlet, video });
 
         await newAnalysis.save();
+
+        pusher.trigger('analysis', `${brandName}_${outlet}`, newAnalysis)
 
         if (!newAnalysis) {
             return res.status(500).send({
