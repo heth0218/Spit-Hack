@@ -3,6 +3,46 @@ const pusher = require('../config/pusher');
 const User = require('../models/User');
 
 
+const datamanipulation = async (response, brand, brandName, video) => {
+
+    const resp = response.data.Percentage
+
+    let mycompanyPercentage = 0;
+    let mycompanyCount = 0;
+    let othercompanyCount = 0;
+
+    for (var el in resp) {
+        if (el === brand.name) {
+            mycompanyPercentage = resp[el]
+        }
+    }
+
+    const res2 = response.data['Total Count'];
+
+    for (var el in res2) {
+        if (el !== brand.name) {
+            othercompanyCount = othercompanyCount + res2[el]
+        }
+        else {
+            mycompanyCount = res2[el]
+        }
+
+    }
+
+    const finalData = {
+        mycompanyPercentage,
+        mycompanyCount,
+        othercompanyPercentage: 100 - mycompanyPercentage,
+        othercompanyCount,
+        brandName,
+        video,
+        outlet: '6027ce39fbddf00ac016e39d'
+    }
+
+    return finalData
+
+}
+
 exports.createAnalytics = async (req, res) => {
     try {
         const { video } = req.body;
@@ -31,39 +71,7 @@ exports.createAnalytics = async (req, res) => {
 
         console.log(response.data)
 
-        const resp = response.data.Percentage
-
-        let mycompanyPercentage = 0;
-        let mycompanyCount = 0;
-        let othercompanyCount = 0;
-
-        for (var el in resp) {
-            if (el === brand.name) {
-                mycompanyPercentage = resp[el]
-            }
-        }
-
-        const res2 = response.data['Total Count'];
-
-        for (var el in res2) {
-            if (el !== brand.name) {
-                othercompanyCount = othercompanyCount + res2[el]
-            }
-            else {
-                mycompanyCount = res2[el]
-            }
-
-        }
-
-        const finalData = {
-            mycompanyPercentage,
-            mycompanyCount,
-            othercompanyPercentage: 100 - mycompanyPercentage,
-            othercompanyCount,
-            brandName,
-            video,
-            outlet: '6027ce39fbddf00ac016e39d'
-        }
+        const finalData = await datamanipulation(response, brand, brandName, video)
 
         const newAnalysis = new Analytics(finalData);
 
