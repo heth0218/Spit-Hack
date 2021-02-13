@@ -11,6 +11,8 @@ app.use(cors());
 
 //Routes
 app.use('/api/user', require('./routes/user'))
+app.use('/api/outlet', require('./routes/outlet'))
+app.use('/api/analytics', require('./routes/analytics'))
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -29,4 +31,4 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
-})
+}) 
