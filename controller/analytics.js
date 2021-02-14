@@ -104,7 +104,7 @@ exports.createAnalytics = async (req, res) => {
 
 
 
-        if (newAnalysis.mycompanyPercentage <= 20) {
+        if (newAnalysis.mycompanyPercentage <= 25) {
             sms(brand.name)
                 .then(() => {
                     console.log("SMS sent!");
