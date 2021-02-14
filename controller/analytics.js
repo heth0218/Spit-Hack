@@ -3,6 +3,9 @@ const pusher = require('../config/pusher');
 const User = require('../models/User');
 const Outlet = require('../models/Outlet')
 
+const accountSid = 'ACd9c13445898ed1dd3eab89f9d4fb99ac';
+const authToken = '1d61c5297575d818f055f6242562855d';
+const client = require('twilio')(accountSid, authToken);
 
 const datamanipulation = async (response, brand, brandName, video) => {
 
@@ -46,6 +49,17 @@ const datamanipulation = async (response, brand, brandName, video) => {
     return finalData
 
 }
+
+async function sms(name) {
+
+    const message = await client.messages.create({
+        to: '+918850356911',
+        from: '+12057758148',
+        body: `Hello, ${name} is having a little dull day as we figure out calculating % of negative score.Make ${name}'s day a little better and hope you have one too!`,
+        // mediaUrl: 'https://climacons.herokuapp.com/clear.png',
+    });
+    return message;
+};
 
 exports.createAnalytics = async (req, res) => {
     try {
@@ -92,6 +106,12 @@ exports.createAnalytics = async (req, res) => {
 
         pusher.trigger('analysis', `${brandName}`, newAnalysis)
 
+        const name = "Heth"
+
+        sms({ name, negative })
+            .then(() => {
+                console.log("SMS sent!");
+            })
 
     } catch (error) {
         console.log(error.message);
