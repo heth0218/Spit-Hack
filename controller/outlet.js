@@ -52,10 +52,3 @@ exports.getAllOutlets = async (req, res) => {
     }
 }
 
-// exports.updateStock = async (req, res) => {
-//     try {
-
-//     } catch (error) {
-
-//     }
-// }

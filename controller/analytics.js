@@ -81,7 +81,6 @@ exports.createAnalytics = async (req, res) => {
 
         await newAnalysis.save();
 
-        // pusher.trigger('analysis', `${brandName}_${outlet}`, newAnalysis)
 
         if (!newAnalysis) {
             return res.status(500).send({
@@ -90,6 +89,9 @@ exports.createAnalytics = async (req, res) => {
         }
 
         res.status(200).send(newAnalysis)
+
+        pusher.trigger('analysis', `${brandName}`, newAnalysis)
+
 
     } catch (error) {
         console.log(error.message);
