@@ -1,0 +1,3 @@
+Flask
+Flask-Cors
+azure-cognitiveservices-vision-computervision

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "885611714681",
+    "project_id": "spit-videostream",
+    "storage_bucket": "spit-videostream.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885611714681:android:ab29bf211841341dc59ca8",
+        "android_client_info": {
+          "package_name": "com.spit_hackathon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885611714681-je5q49kqbbocsn8858t0lui7m544ugi6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6CnbcPiYEsFGrquU4tB_fKzXvqYS1354"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885611714681-je5q49kqbbocsn8858t0lui7m544ugi6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
