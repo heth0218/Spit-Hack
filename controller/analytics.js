@@ -3,8 +3,8 @@ const pusher = require('../config/pusher');
 const User = require('../models/User');
 const Outlet = require('../models/Outlet')
 
-const accountSid = 'ACd9c13445898ed1dd3eab89f9d4fb99ac';
-const authToken = '1d61c5297575d818f055f6242562855d';
+const accountSid = 'AC831e04a54d1d1bb5200754644c81217d';
+const authToken = '488e92d447cb7dab48975ee02d1387a9';
 const client = require('twilio')(accountSid, authToken);
 
 const datamanipulation = async (response, brand, brandName, video) => {
@@ -50,12 +50,12 @@ const datamanipulation = async (response, brand, brandName, video) => {
 
 }
 
-async function sms(name) {
-
+const sms = async (name) => {
+    console.log(name)
     const message = await client.messages.create({
-        to: '+918850356911',
-        from: '+12057758148',
-        body: `Hello, ${name} is having a little dull day as we figure out calculating % of negative score.Make ${name}'s day a little better and hope you have one too!`,
+        messagingServiceSid: 'MG6f2e8e0a58c510249dc608ba0bbe58ab',
+        to: '+919082974316',
+        body: `Hey the company ${name} stock has been reduced below the threshhold limits`,
         // mediaUrl: 'https://climacons.herokuapp.com/clear.png',
     });
     return message;
@@ -102,16 +102,20 @@ exports.createAnalytics = async (req, res) => {
             })
         }
 
+
+
+        if (newAnalysis.mycompanyPercentage <= 20) {
+            sms(brand.name)
+                .then(() => {
+                    console.log("SMS sent!");
+                })
+        }
+
+
         res.status(200).send(newAnalysis)
 
         pusher.trigger('analysis', `${brandName}`, newAnalysis)
 
-        const name = "Heth"
-
-        sms({ name, negative })
-            .then(() => {
-                console.log("SMS sent!");
-            })
 
     } catch (error) {
         console.log(error.message);
